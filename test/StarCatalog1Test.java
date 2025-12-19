@@ -1,24 +1,46 @@
-import static org.junit.Assert;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * JUnit test suite for {@code StarCatalog1}.
+ *
+ * <p>
+ * These tests verify my kernel methods implemented
+ * in {@code StarCatalog1}, including size, membership queries, addition,
+ * removal, and interaction between {@code getAnyName} and
+ * {@code removeStar}.
+ * </p>
+ */
 public class StarCatalog1Test {
 
     /**
-     * Creates an empty catalog.
+     * Constructs and returns an empty {@code StarCatalog1}.
+     *
+     * @return a new, empty {@code StarCatalog1}
      */
     private StarCatalog1 create() {
         return new StarCatalog1();
     }
 
     /**
-     * Creates a star.
+     * Constructs and returns a {@code Star} with the given attributes.
+     *
+     * @param n
+     *            the name of the star
+     * @param ra
+     *            the right ascension of the star
+     * @param dec
+     *            the declination of the star
+     * @return a {@code Star} with the specified name and coordinates
      */
     private StarCatalogKernel.Star s(String n, double ra, double dec) {
         return new StarCatalog.Star1(n, ra, dec);
     }
 
-    // size()
+    /*
+     * Tests for size()
+     */
 
     @Test
     public void testSizeEmpty() {
@@ -34,7 +56,9 @@ public class StarCatalog1Test {
         assertEquals(2, c.size());
     }
 
-    // hasStar()
+    /*
+     * Tests for hasStar()
+     */
 
     @Test
     public void testHasStarEmpty() {
@@ -57,7 +81,9 @@ public class StarCatalog1Test {
         assertFalse(c.hasStar("A"));
     }
 
-    // addStar()
+    /*
+     * Tests for addStar()
+     */
 
     @Test
     public void testAddSingle() {
@@ -65,6 +91,7 @@ public class StarCatalog1Test {
         StarCatalogKernel.Star a = s("A", 1, 1);
 
         c.addStar(a);
+
         assertTrue(c.hasStar("A"));
         assertEquals(1, c.size());
     }
@@ -74,12 +101,15 @@ public class StarCatalog1Test {
         StarCatalog1 c = create();
         c.addStar(s("A", 1, 1));
         c.addStar(s("B", 2, 2));
+
         assertTrue(c.hasStar("A"));
         assertTrue(c.hasStar("B"));
         assertEquals(2, c.size());
     }
 
-    // removeStar()
+    /*
+     * Tests for removeStar()
+     */
 
     @Test
     public void testRemoveSingle() {
@@ -110,7 +140,9 @@ public class StarCatalog1Test {
         assertEquals(1, c.size());
     }
 
-    // getAnyName()
+    /*
+     * Tests for getAnyName()
+     */
 
     @Test
     public void testGetAnyNameSingle() {
@@ -133,7 +165,9 @@ public class StarCatalog1Test {
         assertTrue(name.equals("A") || name.equals("B"));
     }
 
-    // getAnyName + removeStar interaction 
+    /*
+     * Tests for interaction between getAnyName() and removeStar()
+     */
 
     @Test
     public void testGetAnyNameRemoveDoesNotCorrupt() {
@@ -147,10 +181,14 @@ public class StarCatalog1Test {
         String any = c.getAnyName();
         StarCatalogKernel.Star removed = c.removeStar(any);
 
-        // Confirm removed star matches the name returned
+        /*
+         * Confirm removed star matches the returned name.
+         */
         assertEquals(any, removed.getName());
 
-        // Confirm the other star is still present
+        /*
+         * Confirm the remaining star is still present.
+         */
         if (any.equals("A")) {
             assertTrue(c.hasStar("B"));
         } else {

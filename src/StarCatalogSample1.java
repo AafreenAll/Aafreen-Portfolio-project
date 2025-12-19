@@ -1,5 +1,23 @@
+/**
+ * Sample client program that represents a single constellation using a
+ * {@code StarCatalog}.
+ *
+ * <p>
+ * In this program, the {@code StarCatalog} is used to model one constellation
+ * by storing the stars that belong to it. The sample demonstrates adding
+ * stars to the constellation, listing its stars, querying coordinates of
+ * individual stars, removing a star, and checking whether a star is part
+ * of the constellation.
+ * </p>
+ */
 public class StarCatalogSample1 {
 
+    /**
+     * Demonstrates basic usage of {@code StarCatalog} to model a constellation.
+     *
+     * @param args
+     *            command-line arguments (not used)
+     */
     public static void main(String[] args) {
 
         // Create a new star catalog

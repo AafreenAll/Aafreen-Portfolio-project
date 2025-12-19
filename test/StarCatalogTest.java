@@ -1,19 +1,46 @@
+import static org.junit.Assert.*;
+
 import org.junit.Test;
 
+/**
+ * JUnit test suite for {@code StarCatalog} kernel methods: {@code newInstance},
+ * {@code clear}, and {@code transferFrom}.
+ *
+ * <p>
+ * These tests ensure that new instances are working, clearing a catalog
+ * works correctly, and transferFrom correctly moves entries while emptying
+ * the source catalog.
+ * </p>
+ */
 public class StarCatalogTest {
 
     /**
-     * Creates a catalog for testing.
+     * Creates a new empty {@code StarCatalog} for testing.
+     *
+     * @return an empty {@code StarCatalog}
      */
     private static StarCatalog create() {
         return new StarCatalog();
     }
 
+    /**
+     * Creates a {@code Star} for testing.
+     *
+     * @param n
+     *            the name of the star
+     * @param ra
+     *            the right ascension
+     * @param dec
+     *            the declination
+     * @return a new {@code Star} with the given attributes
+     */
     private static Star createStar(String n, double ra, double dec) {
         return new StarCatalog.Star1(n, ra, dec);
     }
 
-    // newInstance
+    /*
+     * Tests for newInstance()
+     */
 
     @Test
     public void testNewInstanceEmpty() {
@@ -31,15 +58,16 @@ public class StarCatalogTest {
 
         StarCatalog d = c.newInstance();
 
-        // Modify d it shouldn't affect c
+        // Modify d; it should not affect c
         d.addStar(createStar("B", 2, 2));
 
         assertTrue(c.hasStar("A"));
         assertFalse(c.hasStar("B"));
     }
 
-    // clear
-
+    /*
+     * Tests for clear()
+     */
 
     @Test
     public void testClearOnEmpty() {
@@ -62,7 +90,9 @@ public class StarCatalogTest {
         assertFalse(c.hasStar("B"));
     }
 
-    // transferFrom()
+    /*
+     * Tests for transferFrom()
+     */
 
     @Test
     public void testTransferFromSimple() {
@@ -107,6 +137,7 @@ public class StarCatalogTest {
         destination.addStar(createStar("Z", 5, 5));
 
         destination.transferFrom(source);
+
         assertEquals(0, destination.size());
         assertEquals(0, source.size());
     }

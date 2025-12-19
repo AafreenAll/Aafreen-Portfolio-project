@@ -1,5 +1,20 @@
+/**
+ * Sample client program that demonstrates the use of {@code StarCatalog}.
+ *
+ * <p>
+ * This class has multiple {@code StarCatalog} operations, including
+ * adding stars, listing contents, creating new instances, transferring
+ * ownership of entries, clearing catalogs, and querying star coordinates.
+ * </p>
+ */
 public class StarCatalogSample2 {
 
+    /**
+     * Demonstrates basic usage of the {@code StarCatalog} ADT.
+     *
+     * @param args
+     *            command-line arguments (not used)
+     */
     public static void main(String[] args) {
 
         // Create two separate catalogs representing different constellations
